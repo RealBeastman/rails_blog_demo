@@ -1,0 +1,11 @@
+<div class="toast toast-end fadeOut">
+  <% if notice %>
+    <div class="alert bg-success">
+      <p class="notice text-black"><%= notice %></p>
+    </div>
+  <% elsif alert %>
+    <div class="alert bg-error">
+      <p class="notice text-black"><%= alert %></p>
+    </div>
+  <% end %>
+</div>
