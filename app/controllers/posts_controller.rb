@@ -25,17 +25,23 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    @post = Post.new(post_params)
-    @post.user = current_user
+    contract = PostContract.new
+    validation_result = contract.call(post_params.to_h)
 
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: "Post was successfully created." }
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+    if validation_result.success?
+      @post = Post.new(validation_result.to_h)
+      @post.user = current_user
+      respond_to do |format|
+        if @post.save
+          format.html { redirect_to @post, notice: "Post was successfully created." }
+          format.json { render :show, status: :created, location: @post }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      render json: {errors: validation_result.errors.to_h}, status: :unprocessable_entity
     end
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_23_235650) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_24_020702) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -60,7 +60,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_23_235650) do
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
-    t.text "body"
+    t.string "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "views", default: 0

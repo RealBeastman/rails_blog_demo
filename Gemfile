@@ -32,6 +32,9 @@ gem "jbuilder"
 # Devise for user accounts
 gem "devise", "~> 4.9.4"
 
+# Dry-validation for controller validation
+gem "dry-validation", "~>1.10.0"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
@@ -70,4 +73,5 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "rspec-rails"
 end
