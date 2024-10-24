@@ -12,7 +12,7 @@
   <div class="divider"><strong>COMMENTS</strong></div>
 </div>
 <div class="mx-auto md:w-2/3 w-full">
-  <%= render "comments/form", post: @post %>
+  <%= render "comments/form", post: @post, comment: @post.comments.build, submit_label: "Reply" %>
   <% @comments.each do |comment| %>
     <%= render "comments/comment", post: @post, comment: comment %>
   <% end %>

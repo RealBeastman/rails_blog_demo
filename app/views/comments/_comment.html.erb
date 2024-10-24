@@ -1,14 +1,28 @@
 <div class="comment-<%= comment.id %> bg-base-200 p-5 rounded-lg my-5">
   <div class="float-start">
     <%= comment.user.name %><br />
-    <span>Posted <%= time_ago_in_words(comment.created_at) %></span>
+    <% if (comment.updated_at - comment.created_at > 1) %>
+      <span>Edited <%= time_ago_in_words(comment.created_at) %> ago.</span>
+    <% else %>
+      <span>Posted <%= time_ago_in_words(comment.created_at) %> ago.</span>
+    <% end %>
   </div>
   <% if current_user == comment.user %>
-    <div class="float-end mb-5">
-      <%= button_to "Delete", [post, comment], class: "btn btn-error", method: :delete %>
+    <div class="join float-end mb-5">
+      <%= link_to "Edit", nil, remote: :true, class: "btn btn-sm btn-accent mx-1",
+      data: {
+        controller: "comments",
+        action: "comments#toggleForm",
+        comments_form_param: "edit-form-#{comment.id}",
+        comments_body_param: "comment-body-#{comment.id}"
+      } %>
+      <%= button_to "Delete", [post, comment], class: "btn btn-sm btn-error mx-1", method: :delete %>
+    </div>
+    <div id="edit-form-<%= comment.id %>" class="hidden clear-both">
+      <%= render "comments/form", post: @post, comment: comment, submit_label: "Update" %>
     </div>
   <% end %>
-  <div class="clear-both mb-5">
+  <div class="clear-both mb-5" id="comment-body-<%= comment.id %>">
     <div class="divider"></div>
     <p class="mt-5"><%= comment.body%></p>
   </div>
