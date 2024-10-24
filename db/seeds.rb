@@ -11,6 +11,9 @@
 title = "Lorem Ipsum"
 loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
+User.create(email: "test@seeded.com", name: "Testman", password: "password", password_confirmation: "password")
+User.create(email: "josh@test.com", name: "Joshua Eastman", password: "password", password_confirmation: "password")
+
 5.times do |x|
-  Post.create(title: "#{title} No. #{x + 1}", body: loremIpsum)
+  Post.create(title: "#{title} No. #{x + 1}", body: loremIpsum, user_id: User.first.id)
 end

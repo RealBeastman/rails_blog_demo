@@ -3,9 +3,31 @@
     <%= link_to "My Website Name", root_path, class: "btn btn-ghost text-xl" %>
   </div>
   <div class="flex-none">
-    <ul class="menu menu-horizontal px-1 font-bold">
+    <ul class="menu menu-horizontal px-1">
+      <li><%= link_to "Home", root_path %></li>
       <li><%= link_to "About", about_path %></li>
       <li><%= link_to "Posts", posts_path %></li>
+      <% if !current_user %>
+        <li>
+          <details>
+            <summary>Account</summary>
+            <ul class="bg-base-200 rounded-t-none p-2">
+              <li><%= link_to "Login", new_user_session_path %></li>
+              <li><%= link_to "Sign Up", new_user_registration_path %></li>
+            </ul>
+          </details>
+        </li>
+      <% else %>
+        <li>
+          <details>
+            <summary><%= current_user.name %></summary>
+            <ul class="bg-base-200 rounded-t-none p-2">
+              <li><%= link_to "Edit", edit_user_registration_path %></li>
+              <li><%= button_to "Logout", destroy_user_session_path, method: :delete %></li>
+            </ul>
+          </details>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>
