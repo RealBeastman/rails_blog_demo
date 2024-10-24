@@ -8,6 +8,12 @@
     </div>
   </div>
 </div>
-<div class="mx-auto md:w-2/3 w-full flex">
+<div class="flex w-full flex-col border-opacity-50 my-5">
+  <div class="divider"><strong>COMMENTS</strong></div>
+</div>
+<div class="mx-auto md:w-2/3 w-full">
   <%= render "comments/form", post: @post %>
+  <% @comments.each do |comment| %>
+    <%= render "comments/comment", post: @post, comment: comment %>
+  <% end %>
 </div>

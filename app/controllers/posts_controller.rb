@@ -11,6 +11,7 @@ class PostsController < ApplicationController
   def show
     # Update views column each time a post is shown
     @post.update(views: @post.views + 1)
+    @comments = @post.comments.order(created_at: :desc)
   end
 
   # GET /posts/new

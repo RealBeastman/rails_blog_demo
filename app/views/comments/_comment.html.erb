@@ -1,0 +1,15 @@
+<div class="comment-<%= comment.id %> bg-base-200 p-5 rounded-lg my-5">
+  <div class="float-start">
+    <%= comment.user.name %><br />
+    <span>Posted <%= time_ago_in_words(comment.created_at) %></span>
+  </div>
+  <% if current_user == comment.user %>
+    <div class="float-end mb-5">
+      <%= button_to "Delete", [post, comment], class: "btn btn-error", method: :delete %>
+    </div>
+  <% end %>
+  <div class="clear-both mb-5">
+    <div class="divider"></div>
+    <p class="mt-5"><%= comment.body%></p>
+  </div>
+</div>
